@@ -1,4 +1,4 @@
-import { SocketServer } from "./socker-server";
+import { SocketServer } from "./socket-server";
 import type { Socket, TCPSocketListener } from "bun";
 
 export abstract class TCPServer extends SocketServer<TCPSocketListener> {
