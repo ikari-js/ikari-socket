@@ -3,18 +3,8 @@ type Informations = {
   port: number;
 };
 
-export default function Server(informations: Informations): ClassDecorator {
+export default function Server(informations: Informations) {
   return function (target: any) {
-    Reflect.defineProperty(target.prototype, "_address", {
-      value: informations.address,
-      writable: false,
-    });
-
-    Reflect.defineProperty(target.prototype, "_port", {
-      value: informations.port,
-      writable: false,
-    });
-
-    target.prototype.initServer();
+    Reflect.defineMetadata("server-informations", informations, target);
   };
 }
