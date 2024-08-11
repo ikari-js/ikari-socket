@@ -2,7 +2,7 @@ import { SocketServer } from "./socker-server";
 import type { Socket, TCPSocketListener } from "bun";
 
 export abstract class TCPServer extends SocketServer<TCPSocketListener> {
-  constructor(protected address: string, protected port: number) {
+  constructor() {
     super();
   }
 

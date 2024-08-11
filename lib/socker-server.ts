@@ -2,11 +2,19 @@ import type { Socket } from "bun";
 
 export abstract class SocketServer<T> {
   protected server!: T;
-  protected address: string | undefined;
-  protected port: number | undefined;
+  private _address: string | undefined;
+  private _port: number | undefined;
+
+  protected get address(): string {
+    return this._address!;
+  }
+
+  protected get port(): number {
+    return this._port!;
+  }
 
   public initServer(): void {
-    if (this.address === undefined || this.port === undefined)
+    if (this._address === undefined || this._port === undefined)
       throw new Error("You have to define address and port!");
     this.start();
   }
