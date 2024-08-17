@@ -19,6 +19,7 @@ export abstract class UDPServer extends SocketServer<udp.Socket<"buffer">> {
 
     this.onServerStarted();
   }
+
   close() {
     this.onServerWillClose();
     this.server.close();
