@@ -10,6 +10,8 @@ export abstract class BaseUDPServer extends SocketServer<udp.Socket<"buffer">> {
     this.onServerWillStart();
 
     this.server = await Bun.udpSocket({
+      port: this.port,
+      hostname: this.address,
       socket: {
         data: this.onMessageReceived.bind(this),
         error: this.handleExceptions.bind(this),
