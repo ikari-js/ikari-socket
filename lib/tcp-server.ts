@@ -32,12 +32,10 @@ export abstract class TCPServer extends SocketServer<TCPSocketListener> {
     this.onServerClosed();
   }
 
-  protected abstract onServerStarted(): void;
   protected abstract onDeviceConnected(
     socket: Socket,
     data?: Buffer
   ): void | Promise<void>;
   protected abstract onMessageReceived(socket: Socket, data?: Buffer): void;
-  protected abstract onServerClosed(): void;
   protected abstract handleExceptions(socket: Socket, error: Error): void;
 }
