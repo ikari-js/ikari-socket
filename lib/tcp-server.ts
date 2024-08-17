@@ -1,7 +1,7 @@
 import { SocketServer } from "./socket-server";
 import type { Socket, TCPSocketListener } from "bun";
 
-export abstract class TCPServer extends SocketServer<TCPSocketListener> {
+export abstract class BaseTCPServer extends SocketServer<TCPSocketListener> {
   constructor() {
     super();
   }
