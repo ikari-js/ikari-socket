@@ -1,7 +1,7 @@
 import type { udp } from "bun";
 import { SocketServer } from "./socket-server";
 
-export abstract class UDPServer extends SocketServer<udp.Socket<"buffer">> {
+export abstract class BaseUDPServer extends SocketServer<udp.Socket<"buffer">> {
   constructor() {
     super();
   }
