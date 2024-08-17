@@ -21,7 +21,10 @@ export abstract class SocketServer<T> {
   public abstract close(): void;
 
   protected abstract start(): void;
+  protected abstract onServerWillStart(): void;
   protected abstract onServerStarted(): void;
+  protected abstract onMessageReceived(socket: Socket, data?: Buffer): void;
+  protected abstract onServerWillClose(): void;
   protected abstract onServerClosed(): void;
   protected abstract handleExceptions(socket: Socket, error: Error): void;
 }
