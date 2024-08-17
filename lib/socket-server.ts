@@ -1,5 +1,3 @@
-import type { Socket } from "bun";
-
 export abstract class SocketServer<T> {
   protected server!: T;
   private _address: string | undefined;
@@ -23,8 +21,6 @@ export abstract class SocketServer<T> {
   protected abstract start(): void;
   protected abstract onServerWillStart(): void;
   protected abstract onServerStarted(): void;
-  protected abstract onMessageReceived(socket: Socket, data?: Buffer): void;
   protected abstract onServerWillClose(): void;
   protected abstract onServerClosed(): void;
-  protected abstract handleExceptions(socket: Socket, error: Error): void;
 }
