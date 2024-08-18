@@ -1,9 +1,9 @@
 import type { Socket, udp } from "bun";
-import TCPServer from "./decorators/tcp-server";
-import { BaseTCPServer } from "./lib/tcp-server";
+import TCPServer from "./src/decorators/tcp-server";
+import { BaseTCPServer } from "./src/lib/tcp-server";
 import "reflect-metadata";
-import UDPServer from "./decorators/udp-server";
-import { BaseUDPServer } from "./lib/udp-server";
+import UDPServer from "./src/decorators/udp-server";
+import { BaseUDPServer } from "./src/lib/udp-server";
 
 @TCPServer({ address: "localhost", port: 3000 })
 class SampleTCP extends BaseTCPServer {
@@ -109,9 +109,9 @@ const servers: Server = {
 function init(servers: Server) {
   const openedServers: string[] = [];
   servers.tcpServers.forEach((server) => {
-    const informations = Reflect.getMetadata("tcp-server-informations", server);
+    const options = Reflect.getMetadata("tcp-server-options", server);
 
-    const address = informations.address + ":" + informations.port;
+    const address = options.address + ":" + options.port;
 
     if (openedServers.includes(address)) {
       throw new Error("Address already in use!");
@@ -120,12 +120,12 @@ function init(servers: Server) {
     openedServers.push(address);
 
     Reflect.defineProperty(server.prototype, "_address", {
-      value: informations.address,
+      value: options.address,
       writable: false,
     });
 
     Reflect.defineProperty(server.prototype, "_port", {
-      value: informations.port,
+      value: options.port,
       writable: false,
     });
 
@@ -133,9 +133,9 @@ function init(servers: Server) {
   });
 
   servers.udpServers.forEach((server) => {
-    const informations = Reflect.getMetadata("udp-server-informations", server);
+    const options = Reflect.getMetadata("udp-server-options", server);
 
-    const address = informations.address + ":" + informations.port;
+    const address = options.address + ":" + options.port;
 
     if (openedServers.includes(address)) {
       throw new Error("Address already in use!");
@@ -145,14 +145,14 @@ function init(servers: Server) {
 
     Reflect.defineProperty(server.prototype, "_address", {
       value:
-        informations.address === "localhost"
+      options.address === "localhost"
           ? "127.0.0.1"
-          : informations.address,
+          : options.address,
       writable: false,
     });
 
     Reflect.defineProperty(server.prototype, "_port", {
-      value: informations.port,
+      value: options.port,
       writable: false,
     });
 
