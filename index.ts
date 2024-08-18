@@ -96,12 +96,17 @@ class SampleUDP extends BaseUDPServer {
   }
 }
 
-const servers = {
+type Server = {
+  tcpServers: (new () => BaseTCPServer)[];
+  udpServers: (new () => BaseUDPServer)[];
+};
+
+const servers: Server = {
   tcpServers: [SampleTCP, SampleTCP1],
   udpServers: [SampleUDP],
 };
 
-function main() {
+function init(servers: Server) {
   const openedServers: string[] = [];
   servers.tcpServers.forEach((server) => {
     const informations = Reflect.getMetadata("tcp-server-informations", server);
@@ -155,4 +160,4 @@ function main() {
   });
 }
 
-main();
+init(servers);
