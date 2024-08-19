@@ -29,12 +29,11 @@ bun add ikari-socket
 
 Here's a simple example of how to create a server and client using Ikari Socket:
 
-```javascript
-// server.js
-import { BaseTCPServer, TCPServer } from "ikari-socket/decorators";
-import type { BaseTCPServer, TCPServer } from "ikari-socket";
-import { init } from "ikari-socket";
-
+```typescript
+// server.ts
+import type { Socket, udp } from "bun";
+import { init, BaseTCPServer, BaseUDPServer  } from "ikari-socket";
+import { TCPServer, UDPServer } from "ikari-socket/decorators";
 
 @TCPServer({ address: "localhost", port: 3000 })
 class SampleTCP extends BaseTCPServer {
