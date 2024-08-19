@@ -4,11 +4,16 @@
 
 ## Table of Contents
 
-- [Installation](#installation)
-- [Usage](#usage)
-- [API Reference](#api-reference)
-- [Contributing](#contributing)
-- [License](#license)
+- [Ikari Socket](#ikari-socket)
+  - [Table of Contents](#table-of-contents)
+  - [Installation](#installation)
+  - [Usage](#usage)
+  - [API Reference](#api-reference)
+    - [Classes](#classes)
+    - [Methods](#methods)
+    - [Decorators](#decorators)
+  - [Contributing](#contributing)
+  - [Contributors](#contributors)
 
 ## Installation
 
@@ -26,6 +31,10 @@ Here's a simple example of how to create a server and client using Ikari Socket:
 
 ```javascript
 // server.js
+import { BaseTCPServer, TCPServer } from "ikari-socket/decorators";
+import type { BaseTCPServer, TCPServer } from "ikari-socket";
+import { init } from "ikari-socket";
+
 
 @TCPServer({ address: "localhost", port: 3000 })
 class SampleTCP extends BaseTCPServer {
